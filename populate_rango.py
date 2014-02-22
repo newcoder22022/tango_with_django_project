@@ -2,34 +2,39 @@ import os
 
 def populate():
     python_cat = add_cat('Python', views=128, likes=64)
-
+    
     add_page(cat=python_cat,
         title="Official Python Tutorial",
-        url="http://docs.python.org/2/tutorial/")
-
+        url="http://docs.python.org/2/tutorial/",
+        views=10)
+        
     add_page(cat=python_cat,
-        title="How to Think like a Computer Scientist",
-        url="http://www.greenteapress.com/thinkpython/")
-
+        title="How to Think Like a Computer Scientist",
+        url="http://www.greenteapress.com/thinkpython/",
+        views=9)
+        
     add_page(cat=python_cat,
         title="Learn Python in 10 Minutes",
-        url="http://www.korokithakis.net/tutorials/python/")
-
-    django_cat = add_cat("Django", views=64, likes=32)
-
+        url="http://www.korokithakis.net/tutorials/python/",
+        views=8)
+        
+    django_cat = add_cat('Django', views=64, likes=32)
+    
     add_page(cat=django_cat,
         title="Official Django Tutorial",
-        url="https://docs.djangoproject.com/en/1.5/intro/tutorial01/")
-
+        url="http://docs.djangoproject.com/en/1.5/intro/tutorial01/",
+        views=20)
+        
     add_page(cat=django_cat,
         title="Django Rocks",
-        url="http://www.djangorocks.com/")
+        url="http://www.djangorocks.com/",
+        views=7)
 
     add_page(cat=django_cat,
         title="How to Tango with Django",
         url="http://www.tangowithdjango.com/")
 
-    frame_cat = add_cat("Other Frameworks", views=32, likes=16)
+    frame_cat = add_cat('Other Frameworks', views=32, likes=16)
 
     add_page(cat=frame_cat,
         title="Bottle",
@@ -39,19 +44,19 @@ def populate():
         title="Flask",
         url="http://flask.pocoo.org")
 
-    # Print out what we have added to the user.
+    # Print out what we have added for the user.
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
             print "- {0} - {1}".format(str(c), str(p))
-
+        
 def add_page(cat, title, url, views=0):
-    p = Page.objects.get_or_create(category=cat, title=title, url=url, views=views)[0]
+    p = Page.objects.get_or_create(category=cat, title=title, url=url, views=views)
     return p
-
-def add_cat(name):
-    c = Category.objects.get_or_create(name=name)[0]
+    
+def add_cat(name, views, likes):
+    c = Category.objects.get_or_create(name=name, views=views, likes=likes)[0]
     return c
-
+    
 # Start execution here!
 if __name__ == '__main__':
     print "Starting Rango population script..."
